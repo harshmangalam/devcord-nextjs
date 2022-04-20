@@ -1,9 +1,10 @@
+import AppLayout from "@/layouts/AppLayout";
 import { Button } from "@mantine/core";
 
 export default function Home() {
   return (
-    <div>
+    <AppLayout>
       <Button component="a">Next link button</Button>
-    </div>
+    </AppLayout>
   );
 }
