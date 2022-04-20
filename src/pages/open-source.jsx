@@ -2,7 +2,7 @@ import OpenSourceCard from "@/components/OpenSourceCard";
 import AppLayout from "@/layouts/AppLayout";
 import { Button, SimpleGrid } from "@mantine/core";
 
-export default function Home() {
+export default function OpenSource() {
   return (
     <AppLayout>
       <SimpleGrid

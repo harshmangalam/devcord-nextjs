@@ -1,7 +1,7 @@
 import { ThemeIcon, UnstyledButton, Group, Text } from "@mantine/core";
 import Link from "next/link";
 
-export default function MenuLink({ icon, color, name, href }) {
+export default function MenuLink({ icon, color, title, href }) {
   return (
     <Link href={href} passHref>
       <UnstyledButton
@@ -22,11 +22,11 @@ export default function MenuLink({ icon, color, name, href }) {
         })}
       >
         <Group>
-          <ThemeIcon color={color} variant="light">
+          <ThemeIcon size={"lg"} color={color} variant="light">
             {icon}
           </ThemeIcon>
 
-          <Text size="sm">{name}</Text>
+          <Text size="lg">{title}</Text>
         </Group>
       </UnstyledButton>
     </Link>

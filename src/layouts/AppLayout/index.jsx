@@ -1,7 +1,6 @@
 import {
   ScrollArea,
   Navbar,
-  Box,
   AppShell,
   Header,
   Group,
@@ -9,18 +8,15 @@ import {
   ActionIcon,
   MediaQuery,
   Footer,
-  Aside,
   Burger,
   useMantineTheme,
 } from "@mantine/core";
 
 import { FiSun, FiMoon } from "react-icons/fi";
-// import MenuLink from "@/layouts/AppLayout/MenuLink";
-// import Profile from "@/layouts/AppLayout/Profile";
+import MenuLink from "@/layouts/AppLayout/MenuLink";
+import Profile from "@/layouts/AppLayout/Profile";
 import { links } from "@/layouts/AppLayout/_links";
-import Logo from "./Logo";
-import MenuLink from "./MenuLink";
-import Profile from "./Profile";
+import Logo from "@/layouts/AppLayout/Logo";
 import { useState } from "react";
 
 export default function AppLayout({ children }) {
@@ -30,7 +26,6 @@ export default function AppLayout({ children }) {
   return (
     <AppShell
       navbarOffsetBreakpoint="sm"
-      asideOffsetBreakpoint="sm"
       fixed
       padding="md"
       navbar={
@@ -60,7 +55,6 @@ export default function AppLayout({ children }) {
                   onClick={() => setOpened((o) => !o)}
                   size="sm"
                   color={theme.colors.gray[6]}
-                  mr="xl"
                 />
               </MediaQuery>
               <Logo colorScheme={colorScheme} />
@@ -92,6 +86,8 @@ export default function AppLayout({ children }) {
               : theme.colors.gray[0],
         },
       })}
-    ></AppShell>
+    >
+      {children}
+    </AppShell>
   );
 }
