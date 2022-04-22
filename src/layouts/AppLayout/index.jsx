@@ -10,7 +10,12 @@ import {
   Footer,
   Burger,
   useMantineTheme,
+  Drawer,
+  Stack,
+  Box,
 } from "@mantine/core";
+
+import { CgMenuLeftAlt } from "react-icons/cg";
 
 import { FiSun, FiMoon } from "react-icons/fi";
 import MenuLink from "@/layouts/AppLayout/MenuLink";
@@ -20,44 +25,43 @@ import Logo from "@/layouts/AppLayout/Logo";
 import { useState } from "react";
 
 export default function AppLayout({ children }) {
-  const [opened, setOpened] = useState(false);
   const theme = useMantineTheme();
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
+  const [drawer, setDrawer] = useState(false);
   return (
     <AppShell
       navbarOffsetBreakpoint="sm"
       fixed
       padding="md"
       navbar={
-        <Navbar
-          width={{ base: 300 }}
-          p="xs"
-          hiddenBreakpoint="sm"
-          hidden={!opened}
-        >
-          <Navbar.Section grow component={ScrollArea} mx="-xs" px="xs">
-            {links.map((link) => (
-              <MenuLink {...link} />
-            ))}
-          </Navbar.Section>
-          <Navbar.Section>
-            <Profile />
-          </Navbar.Section>
-        </Navbar>
+        <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
+          <Navbar
+            width={{ base: 280 }}
+            p="xs"
+            hiddenBreakpoint={"sm"}
+            hidden={!drawer}
+          >
+            <Navbar.Section grow component={ScrollArea} mx="-xs" px="xs">
+              {links.map((link) => (
+                <MenuLink {...link} />
+              ))}
+            </Navbar.Section>
+            <Navbar.Section>
+              <Profile />
+            </Navbar.Section>
+          </Navbar>
+        </MediaQuery>
       }
       header={
         <Header height={60} p="xs">
           <Group position="apart">
             <Group>
               <MediaQuery largerThan="sm" styles={{ display: "none" }}>
-                <Burger
-                  opened={opened}
-                  onClick={() => setOpened((o) => !o)}
-                  size="sm"
-                  color={theme.colors.gray[6]}
-                />
+                <ActionIcon onClick={() => setDrawer(true)}>
+                  <CgMenuLeftAlt />
+                </ActionIcon>
               </MediaQuery>
-              <Logo colorScheme={colorScheme} />
+              <Logo />
             </Group>
             <ActionIcon
               variant="default"
@@ -88,6 +92,23 @@ export default function AppLayout({ children }) {
       })}
     >
       {children}
+
+      <Drawer
+        opened={drawer}
+        onClose={() => setDrawer(false)}
+        title="Devcord"
+        padding="xl"
+        size="md"
+      >
+        <Stack style={{ height: "95%" }} justify={"space-between"}>
+          <Box style={{ flexGrow: 1 }}>
+            {links.map((link) => (
+              <MenuLink {...link} />
+            ))}
+          </Box>
+          <Profile />
+        </Stack>
+      </Drawer>
     </AppShell>
   );
 }
